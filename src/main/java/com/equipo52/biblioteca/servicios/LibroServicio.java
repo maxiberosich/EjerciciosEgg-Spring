@@ -95,7 +95,7 @@ public class LibroServicio {
         }        
     }
     
-    public void validar(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion{
+    private void validar(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion{
         
         if(isbn == null){
             throw new MiExcepcion("El isbn no puede ser nulo");
@@ -117,6 +117,6 @@ public class LibroServicio {
             throw new MiExcepcion("El id de la Editorial no puede ser nulo o estar en blanco");
         }
         
-    }
+    }   
     
 }

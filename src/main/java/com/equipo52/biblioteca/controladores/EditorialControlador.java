@@ -5,9 +5,7 @@
 package com.equipo52.biblioteca.controladores;
 
 import com.equipo52.biblioteca.excepciones.MiExcepcion;
-import com.equipo52.biblioteca.servicios.AutorServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.equipo52.biblioteca.servicios.EditorialServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,28 +19,28 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Max
  */
 @Controller
-@RequestMapping("/autor")
-public class AutorControlador {
+@RequestMapping("/editorial")
+public class EditorialControlador {
     
     @Autowired
-    private AutorServicio autorServicio;
+    private EditorialServicio editorialServicio;
     
     @GetMapping("/registrar")
     public String registrar(){
-        return "autor_form.html";
+        return "editorial_form.html";
     }
     
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap modelo){
         try {
-            autorServicio.crearAutor(nombre);
-            modelo.put("exito", "Cargado autor con exito");
+            editorialServicio.crearEditorial(nombre);
+            modelo.put("exito", "Cargada editorial con exito");
         } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage());
-            return "autor_form.html";
+            return "editorial_form.html";
         }
         
-        return "index.html";
+        return "editorial_form.html";
     }
     
 }

@@ -5,6 +5,7 @@
 package com.equipo52.biblioteca.servicios;
 
 import com.equipo52.biblioteca.entidades.Autor;
+import com.equipo52.biblioteca.excepciones.MiExcepcion;
 import com.equipo52.biblioteca.repositorios.AutorRepositorio;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
@@ -24,7 +25,9 @@ public class AutorServicio {
     private AutorRepositorio autorRepositorio;
     
     @Transactional
-    public void crearAutor(String nombre){
+    public void crearAutor(String nombre) throws MiExcepcion{
+        
+        validar(nombre);
         
         Autor autor = new Autor();
         
@@ -44,7 +47,9 @@ public class AutorServicio {
         
     }
     
-    public void modificarAutor(String id, String nombre){
+    public void modificarAutor(String id, String nombre) throws MiExcepcion{
+        
+        validar(nombre);
         
         Optional<Autor> respuesta = autorRepositorio.findById(id);
         
@@ -58,6 +63,12 @@ public class AutorServicio {
             
         }
         
+    }
+    
+    public void validar(String nombre) throws MiExcepcion{
+        if (nombre == null || nombre.isEmpty()) {
+            throw new MiExcepcion("El nombre no puede ser nulo o estar vacio.");
+        }
     }
     
 }
