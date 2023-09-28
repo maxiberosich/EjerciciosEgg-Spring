@@ -4,10 +4,10 @@
  */
 package com.equipo52.biblioteca.controladores;
 
+import com.equipo52.biblioteca.entidades.Autor;
 import com.equipo52.biblioteca.excepciones.MiExcepcion;
 import com.equipo52.biblioteca.servicios.AutorServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -43,6 +43,15 @@ public class AutorControlador {
         }
         
         return "index.html";
+    }
+    
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo){
+        List<Autor> autores = autorServicio.listarAutores();
+        
+        modelo.addAttribute("autores", autores);
+        
+        return "autor_list.html";
     }
     
 }

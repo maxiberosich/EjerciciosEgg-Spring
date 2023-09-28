@@ -51,6 +51,11 @@ public class LibroControlador {
             @RequestParam String idEditorial, ModelMap modelo) {
         try {
             libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
+            List<Autor> autores = autorServicio.listarAutores();
+            List<Editorial> editoriales = editorialServicio.listarEditoriales();
+
+            modelo.addAttribute("autores", autores);
+            modelo.addAttribute("editoriales", editoriales);
             modelo.put("exito", "El libro fue cargado exitosamente!");
         } catch (MiExcepcion ex) {
             List<Autor> autores = autorServicio.listarAutores();
