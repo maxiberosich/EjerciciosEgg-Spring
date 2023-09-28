@@ -11,8 +11,6 @@ import com.equipo52.biblioteca.servicios.AutorServicio;
 import com.equipo52.biblioteca.servicios.EditorialServicio;
 import com.equipo52.biblioteca.servicios.LibroServicio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,24 +38,30 @@ public class LibroControlador {
     public String cargar(ModelMap modelo) {
         List<Autor> autores = autorServicio.listarAutores();
         List<Editorial> editoriales = editorialServicio.listarEditoriales();
-        
+
         modelo.addAttribute("autores", autores);
         modelo.addAttribute("editoriales", editoriales);
-        
+
         return "libro_form.html";
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(required=false) Long isbn, @RequestParam String titulo,
-            @RequestParam(required=false) Integer ejemplares, ModelMap modelo) {
+    public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo,
+            @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor,
+            @RequestParam String idEditorial, ModelMap modelo) {
         try {
-            libroServicio.crearLibro(isbn, titulo, ejemplares, titulo, titulo);
+            libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
             modelo.put("exito", "El libro fue cargado exitosamente!");
         } catch (MiExcepcion ex) {
+            List<Autor> autores = autorServicio.listarAutores();
+            List<Editorial> editoriales = editorialServicio.listarEditoriales();
+
+            modelo.addAttribute("autores", autores);
+            modelo.addAttribute("editoriales", editoriales);
             modelo.put("error", ex.getMessage());
             return "libro_form.html";
         }
-        return "index.html";
+        return "libro_form.html";
     }
 
 }

@@ -39,7 +39,7 @@ public class LibroServicio {
         validar(isbn, titulo, ejemplares, idAutor, idEditorial);
         
         Autor autor = autorRepositorio.findById(idAutor).get();
-        Editorial editorial = editorialRepositorio.findById(idAutor).get();
+        Editorial editorial = editorialRepositorio.findById(idEditorial).get();
         Libro libro = new Libro();
         
         libro.setIsbn(isbn);
@@ -70,7 +70,7 @@ public class LibroServicio {
         
         Optional<Libro> respuesta = libroRepositorio.findById(isbn);
         Optional<Autor> respuestaAutor = autorRepositorio.findById(idAutor);
-        Optional<Editorial> respuestaEditorial = editorialRepositorio.findById(idAutor);
+        Optional<Editorial> respuestaEditorial = editorialRepositorio.findById(idEditorial);
         
         Autor autor = new Autor();
         Editorial editorial = new Editorial();
