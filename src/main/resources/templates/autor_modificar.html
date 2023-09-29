@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 -->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
+        <title>Modificar Autor</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
@@ -64,29 +64,44 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
             </nav>
         </div>
-        <!-- TABLA DE INFORMACION DE AUTORES DENTRO DE LA TABLA DE DATOS -->
-        <div class="container m-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id del autor</th>
-                        <th scope="col">Nombre del autor</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody th:each="autor : ${autores}">
-                    <tr>
-                        <th scope="row" th:text="${autor.id}"></th>
-                        <td th:text="${autor.nombre}"></td>
-                        <td>
-                            <a th:href="@{/autor/modificar/__${autor.id}__}">Modificar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+         
+        <header>
+            <div class="container">
+                <h2>Modifica el autor aquí!</h2>
+            </div>
+        </header>
+        
+        <div class="container">
+            
+            <form th:action="@{/autor/modificar/__${autor.id}__}" method="POST">
+                
+                <input hidden th:value="${id}" name="id">
+                
+                <div>
+                    <input th:value="${autor.nombre}" type="text" class="form_group" name="nombre" placeholder="Nuevo mombre del Autor">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Modificar</button>
+                
+            </form>
+            
         </div>
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+            <div>
+                <h5>Error!!</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+        
+        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mensajeExito">
+            <div>
+                <h5>Exito!!</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
          crossorigin="anonymous"></script>
     </body>

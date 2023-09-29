@@ -6,6 +6,7 @@ package com.equipo52.biblioteca.controladores;
 
 import com.equipo52.biblioteca.entidades.Autor;
 import com.equipo52.biblioteca.entidades.Editorial;
+import com.equipo52.biblioteca.entidades.Libro;
 import com.equipo52.biblioteca.excepciones.MiExcepcion;
 import com.equipo52.biblioteca.servicios.AutorServicio;
 import com.equipo52.biblioteca.servicios.EditorialServicio;
@@ -68,5 +69,12 @@ public class LibroControlador {
         }
         return "libro_form.html";
     }
-
+    
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo){
+        List<Libro> libros = libroServicio.listarLibros();
+        modelo.addAttribute("libros", libros);
+        return "libro_list.html";
+    }
+    
 }

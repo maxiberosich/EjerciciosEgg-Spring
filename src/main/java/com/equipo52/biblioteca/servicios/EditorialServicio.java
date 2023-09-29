@@ -65,6 +65,10 @@ public class EditorialServicio {
         
     }
     
+    public Editorial getOne(String id){
+        return editorialRepositorio.getOne(id);
+    }
+    
     private void validar(String nombre) throws MiExcepcion{
         if (nombre == null || nombre.isEmpty()) {
             throw new MiExcepcion("El nombre no puede ser nulo o estar vacio.");
