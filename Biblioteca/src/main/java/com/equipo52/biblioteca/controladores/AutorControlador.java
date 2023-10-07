@@ -8,8 +8,6 @@ import com.equipo52.biblioteca.entidades.Autor;
 import com.equipo52.biblioteca.excepciones.MiExcepcion;
 import com.equipo52.biblioteca.servicios.AutorServicio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -45,7 +43,7 @@ public class AutorControlador {
             return "autor_form.html";
         }
         
-        return "index.html";
+        return "autor_form.html";
     }
     
     @GetMapping("/lista")

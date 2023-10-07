@@ -1,0 +1,15 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 02/10/2023, 17:18:05
+    Author     : Max
+*/
+
+.contenedor {
+  max-width: 400px;
+  overflow: hidden; /* Oculta el contenido que supera el tamaño máximo */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido */
+  white-space: nowrap; /* Evita que el texto se desplace a una nueva línea */
+}
