@@ -4,9 +4,12 @@
  */
 package com.equipo52.biblioteca.controladores;
 
+import com.equipo52.biblioteca.entidades.Usuario;
 import com.equipo52.biblioteca.excepciones.MiExcepcion;
 import com.equipo52.biblioteca.servicios.UsuarioServicio;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +53,25 @@ public class PortalControlador {
     }
     
     @GetMapping("/login")
-    public String login(){
+    public String login(@RequestParam(required = false) String error, ModelMap modelo){
+        if(error != null){
+            modelo.put("error", "Usuario o Contraseña invalidos");
+        }
+        
         return "login.html";
     }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/inicio")
+    public String inicio(HttpSession session){
+        
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        
+        if(logueado.getRol().toString().equals("ADMIN")){
+            return "redirect:/admin/dashboard";
+        }
+        
+        return "inicio.html";
+    }
+    
 }

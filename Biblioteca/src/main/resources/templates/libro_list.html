@@ -3,7 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Lista Libros</title>
         <meta charset="UTF-8">
@@ -74,6 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <th scope="col">Ejemplares</th>
                         <th scope="col">Autor</th>
                         <th scope="col">Editorial</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                     </tr>
                 </thead>
                 <tbody th:each="libro : ${libros}">
@@ -83,6 +84,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <td th:text="${libro.ejemplares}"></td>
                         <td th:text="${libro.autor.nombre}"></td>
                         <td th:text="${libro.editorial.nombre}"></td>
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{libro/modificar/__${libro.isbn}__"></a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

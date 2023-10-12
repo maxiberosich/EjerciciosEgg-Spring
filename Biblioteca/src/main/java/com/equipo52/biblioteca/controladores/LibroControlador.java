@@ -12,10 +12,13 @@ import com.equipo52.biblioteca.servicios.AutorServicio;
 import com.equipo52.biblioteca.servicios.EditorialServicio;
 import com.equipo52.biblioteca.servicios.LibroServicio;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,6 +78,24 @@ public class LibroControlador {
         List<Libro> libros = libroServicio.listarLibros();
         modelo.addAttribute("libros", libros);
         return "libro_list.html";
+    }
+    
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable Long isbn, ModelMap modelo){
+        modelo.put("libro", libroServicio.getOne(isbn));
+        
+        return "libro_modificar.html";
+    }
+    
+    @PostMapping("/modificar/{id}")
+    public String modificar(@PathVariable Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial, ModelMap modelo){
+        try {
+            libroServicio.modificarLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
+            return "redirect:../lista";
+        } catch (MiExcepcion ex) {
+            modelo.put("error", ex.getMessage());
+            return "libro_modificar.html";
+        }
     }
     
 }

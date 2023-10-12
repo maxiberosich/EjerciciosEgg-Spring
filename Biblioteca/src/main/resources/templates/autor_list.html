@@ -71,14 +71,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr>
                         <th scope="col">Id del autor</th>
                         <th scope="col">Nombre del autor</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                     </tr>
                 </thead>
                 <tbody th:each="autor : ${autores}">
                     <tr>
                         <th scope="row" th:text="${autor.id}"></th>
                         <td th:text="${autor.nombre}"></td>
-                        <td>
+                        <td sec:authorize="hasRole('ADMIN')">
                             <a th:href="@{/autor/modificar/__${autor.id}__}">Modificar</a>
                         </td>
                     </tr>

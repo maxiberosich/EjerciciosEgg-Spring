@@ -3,7 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Lista Editoriales</title>
         <meta charset="UTF-8">
@@ -71,14 +71,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr>
                         <th scope="col">Id de la editorial</th>
                         <th scope="col">Nombre de la editorial</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                     </tr>
                 </thead>
                 <tbody th:each="editorial : ${editoriales}">
                     <tr>
                         <th scope="row" th:text="${editorial.id}"></th>
                         <td th:text="${editorial.nombre}"></td>
-                        <td>
+                        <td sec:authorize="hasRole('ADMIN')">
                             <a th:href="@{/editorial/modificar/__${editorial.id}__}">Modificar</a>
                         </td>
                     </tr>
