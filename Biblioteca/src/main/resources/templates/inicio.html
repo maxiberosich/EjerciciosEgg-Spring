@@ -8,7 +8,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navBar">
+        <nav class="navbar navbar-expand-lg bg-primary navBar" data-bs-theme="dark">
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,6 +51,7 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/perfil}" >Editar Perfil</a></li>
                             <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -64,8 +65,13 @@
                     <a class="navbar-brand" href="#">BIBLIOTECA EGG</a>
                 </div>
                 <div class="container contenedorLibros">
-                    <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+                    <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre}"></p>
                     <a class="btn btn-xl mt-2 boton">Ver Listado</a>
+                </div>
+                <div class="container">
+                    <a class="d-flex align-items-center">
+                        <img class="logo" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="Imagen perfil"/>
+                    </a>
                 </div>
                 <div class="bg-circle-1 bg-circle"></div>
                 <div class="bg-circle-2 bg-circle"></div>
