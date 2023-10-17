@@ -63,6 +63,30 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
+    public List<Usuario> listarUsuarios(){
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+    }
+    
+    @Transactional
+    public void cambiarRol(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        
+        if(respuesta.isPresent()){
+            
+            Usuario usuario = respuesta.get();
+            
+            if(usuario.getRol().equals(Rol.USER)){
+                usuario.setRol(Rol.ADMIN);
+            }else if(usuario.getRol().equals(Rol.ADMIN)){
+                usuario.setRol(Rol.USER);
+            }
+            
+        }
+    }
+    
+    @Transactional
     public void actualizar(MultipartFile archivo, String idUsuario, String nombre, String email, String password, String password2) throws MiExcepcion {
 
         validar(nombre, email, password, password2);
