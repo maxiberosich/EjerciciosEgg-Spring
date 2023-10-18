@@ -37,6 +37,14 @@ public class NoticiaControlador {
         return "index.html";
     }
     
+    @GetMapping("/login")
+    public String ingresar(@RequestParam(required = false) String error, ModelMap modelo){
+        if(error != null){
+            modelo.put("error", "Usuario o contraseña invalidos");
+        }
+        return "login.html";
+    }
+    
     @GetMapping("/noticia/registrar")
     public String cargarNoticia(){
         return "panelAdmin.html";

@@ -7,9 +7,11 @@ package com.example.demo.entidades;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -17,6 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author Max
  */
 @Entity
+@Data
 public class Noticia {
     
     @Id
@@ -29,41 +32,8 @@ public class Noticia {
     
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
-
-    public Noticia() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getCuerpo() {
-        return cuerpo;
-    }
-
-    public void setCuerpo(String cuerpo) {
-        this.cuerpo = cuerpo;
-    }
-
-    public Date getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(Date fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
+      
+    @ManyToOne
+    private Periodista creador;
     
-            
 }
