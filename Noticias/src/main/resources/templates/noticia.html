@@ -6,7 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html xmnls:th="http://www.thymeleaf.org">
     <head th:replace="/fragments/head :: head"></head>
     
-    <body class="d-flex h-100 text-center text-bg-dark">
+    <body class=" h-100 text-center text-bg-dark">
         <nav th:replace="/fragments/navbar :: nav"></nav>
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
          th:action="@{/noticia/new/__${noticia.id}__}" method="POST">

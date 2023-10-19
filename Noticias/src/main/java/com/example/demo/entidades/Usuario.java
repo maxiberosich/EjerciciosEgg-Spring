@@ -10,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -46,5 +47,8 @@ public class Usuario {
     protected void onCreate(){
         fechaDeAlta = new Date();
     }
+    
+    @OneToOne
+    private Imagen imagen;
     
 }

@@ -22,7 +22,23 @@ public class SeguridadWeb {
     
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.authorizeRequests().requestMatchers("/css/*","/js/*", "/img/*", "/**").permitAll();
+        http
+                .authorizeRequests()
+                    .requestMatchers("/css/*","/js/*", "/img/*", "/**")
+                    .permitAll()
+                .and().formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/logincheck")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/inicio")
+                    .permitAll()
+                .and().logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login")
+                    .permitAll()
+                .and().csrf()
+                    .disable();
         return http.build();
     }
     

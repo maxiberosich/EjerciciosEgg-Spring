@@ -4,6 +4,7 @@
  */
 package com.example.demo.servicios;
 
+import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Usuario;
 import com.example.demo.enums1.Rol;
 import com.example.demo.excepciones.MiExcepcion;
@@ -12,6 +13,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -23,8 +25,11 @@ public class UsuarioServicio {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
     
+    @Autowired
+    private ImagenServicio imagenServicio;
+    
     @Transactional
-    public void registrar(String nombre, String email, String password, String password2) throws MiExcepcion{
+    public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2) throws MiExcepcion{
         
         validar(nombre,email,password,password2);
         
@@ -35,6 +40,10 @@ public class UsuarioServicio {
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setActivo(Boolean.TRUE);
         usuario.setRol(Rol.USER);
+        
+        Imagen imagen = imagenServicio.guardar(archivo);
+        
+        usuario.setImagen(imagen);
         
         usuarioRepositorio.save(usuario);
         

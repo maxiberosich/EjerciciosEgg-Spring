@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <nav th:replace="/fragments/navbar :: nav"></nav>
 
         <div>
-                <form action="/noticia/registro" method="POST">
+                <form th:action="@{/noticia/registro}" method="POST">
 
                 <h1 class="h3 mb-3 fw-normal">PSST!! Cuentanos el chismecito aqui.</h1>
 
@@ -29,18 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </form>
         </div>             
 
-            <div th:if="${Exito != null}" class="card text-white bg-success mb-3 mensajeExito">
-                <div>
-                    <h5>Exito!!</h5>
-                    <p class="card-text" th:text="${Exito}"></p>
-                </div>
-            </div>        
-            <div th:if="${Error != null}" class="card text-white bg-danger mb-3 mensajeError">
-                <div>
-                    <h5>Error!!</h5>
-                    <p class="card-text" th:text="${Error}"></p>
-                </div>
-            </div> 
+            <div th:replace="/fragments/mensaje :: div"></div> 
 
 
 
