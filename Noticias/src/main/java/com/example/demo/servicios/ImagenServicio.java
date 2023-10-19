@@ -7,9 +7,7 @@ package com.example.demo.servicios;
 import com.example.demo.entidades.Imagen;
 import com.example.demo.excepciones.MiExcepcion;
 import com.example.demo.repositorios.ImagenRepositorio;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +35,31 @@ public class ImagenServicio {
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }            
+        }
+        return null;
+    }
+    
+    public Imagen actualizar(MultipartFile archivo, String idImagen){
+        if(archivo != null){
+            try {
+                Imagen imagen = new Imagen();
+                
+                if(idImagen != null){
+                    Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
+                    
+                    if(respuesta.isPresent()){
+                        imagen = respuesta.get();
+                    }
+                }
+                
+                imagen.setMime(archivo.getContentType());
+                imagen.setNombre(archivo.getName());
+                imagen.setContenido(archivo.getBytes());
+                
+                return imagenRepositorio.save(imagen);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
         return null;
     }

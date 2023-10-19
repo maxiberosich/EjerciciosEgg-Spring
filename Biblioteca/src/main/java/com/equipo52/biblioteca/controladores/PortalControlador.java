@@ -104,7 +104,7 @@ public class PortalControlador {
             modelo.put("nombre", nombre);
             modelo.put("email", email);
             
-            return "usuario_modificacion.html";
+            return "usuario_modificar.html";
         }
     }
     

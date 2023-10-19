@@ -5,12 +5,13 @@
 package com.example.demo.controladores;
 
 import com.example.demo.entidades.Noticia;
+import com.example.demo.entidades.Usuario;
 import com.example.demo.excepciones.MiExcepcion;
 import com.example.demo.servicios.NoticiaServicio;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +64,13 @@ public class NoticiaControlador {
         return "panelAdmin.html";
     }
     
-   
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @GetMapping("/inicio")
+    public String inicio(HttpSession session){
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+                
+        return "inicio.html";
+    }
     
     @GetMapping("/noticia/new/{id}")
     public String verNoticia(@PathVariable String id, ModelMap modelo){

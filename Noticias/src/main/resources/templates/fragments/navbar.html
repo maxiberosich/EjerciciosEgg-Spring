@@ -4,13 +4,28 @@
         <div class="navbar-brand" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active me-2" aria-current="page" th:href="@{/noticia/registrar}">Cargar Noticia</a>
+                    <a class="nav-link active me-2" aria-current="page" th:if="${session.usuariosession != null}" th:href="@{/noticia/registrar}">
+                        Cargar Noticia
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/user/registrar}">Registrarse</a>
+                    <a class="nav-link active" th:if="${session.usuariosession == null}" aria-current="page" th:href="@{/user/registrar}">
+                        Registrarse
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Ingresar</a>
+                    <a class="nav-link active" th:if="${session.usuariosession == null}" aria-current="page" th:href="@{/login}">
+                        Ingresar
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/user/perfil}" >Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

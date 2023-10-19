@@ -43,12 +43,12 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     private Date fechaDeAlta;
     
+    @OneToOne
+    private Imagen imagen;
+    
     @PrePersist
     protected void onCreate(){
         fechaDeAlta = new Date();
-    }
-    
-    @OneToOne
-    private Imagen imagen;
+    }   
     
 }
